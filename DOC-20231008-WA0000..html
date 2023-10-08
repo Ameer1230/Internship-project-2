@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            padding: 16px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="gallery" id="gallery">
+    <!-- Add your image URLs here -->
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20200318142254/html9.png" alt="Image 1">
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20200318142245/CSS8.png" alt="Image 2">
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20200318142257/JavaScript2.png" alt="Image 3">
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20200318142240/Bootstrap5.png" alt="Image 4">
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20200318142303/jquery.png" alt="Image 5">
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20200318142309/php7.png" alt="Image 6">
+    <!-- Add more images as needed -->
+</div>
+
+<div class="lightbox" id="lightbox">
+    <span class="close-btn" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="" alt="Enlarged Image">
+</div>
+
+<script>
+    const gallery = document.getElementById('gallery');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    gallery.addEventListener('click', (event) => {
+        if (event.target.tagName === 'IMG') {
+            lightboxImg.src = event.target.src;
+            lightbox.style.display = 'flex';
+        }
+    });
+
+    function closeLightbox() {
+        lightbox.style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
